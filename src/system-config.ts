@@ -25,10 +25,15 @@ const barrels: string[] = [
 
   // Thirdparty barrels.
   'rxjs',
+  'redux',
 
   // App specific barrels.
   'app',
   'app/shared',
+  'app/+accounts',
+  'app/+accounts/+bank-accounts',
+  'app/+accounts/+transactions',
+  'app/+accounts/+budget',
   /** @cli-barrel */
 ];
 
@@ -45,6 +50,7 @@ System.config({
   map: {
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
+    '@ngrx': 'vendor/@ngrx',
     'main': 'main.js'
   },
   packages: cliSystemConfigPackages
