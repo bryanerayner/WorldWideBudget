@@ -1,5 +1,10 @@
 <h1>
   {{title}}
 </h1>
-
+<h2>
+  {{subTitle}}
+</h2>
+    <a [routerLink]="['/budget/...']">Budget</a>
+    <a [routerLink]="['/bank-accounts/...']">Bank Accounts</a>
+    <a [routerLink]="['/account/...']">Account</a>
 <router-outlet></router-outlet>

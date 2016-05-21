@@ -1,14 +1,14 @@
-import {
-  describe,
-  ddescribe,
-  expect,
-  iit,
-  it
-} from '@angular/core/testing';
-import {AccountTransactionReducer} from './account-transaction.reducer';
+// import {
+//   describe,
+//   ddescribe,
+//   expect,
+//   iit,
+//   it
+// } from '@angular/core/testing';
+// import {accountTransaction} from './account-transaction.reducer';
 
-describe('AccountTransaction', () => {
-  it('should create an instance', () => {
-    expect(new AccountTransactionReducer()).toBeTruthy();
-  });
-});
+// describe('AccountTransaction', () => {
+//   it('should exist', () => {
+//     expect(accountTransaction).toBeTruthy();
+//   });
+// });

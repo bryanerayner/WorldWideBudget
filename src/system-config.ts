@@ -3,10 +3,27 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+    '@angular2-material': 'vendor/@angular2-material'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  '@angular2-material/core': {
+  format: 'cjs',
+  defaultExtension: 'js',
+  main: 'core.js'
+},
+'@angular2-material/toolbar': {
+  format: 'cjs',
+  defaultExtension: 'js',
+  main: 'toolbar.js'
+},
+'@angular2-material/sidenav': {
+  format: 'cjs',
+  defaultExtension: 'js',
+  main: 'sidenav.js'
+}
+
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -22,22 +39,24 @@ const barrels: string[] = [
   '@angular/router',
   '@angular/platform-browser',
   '@angular/platform-browser-dynamic',
+  
 
   // Thirdparty barrels.
   'rxjs',
-  'redux',
 
   // App specific barrels.
   'app',
   'app/shared',
-  'app/+accounts',
-  'app/+accounts/+bank-accounts',
-  'app/+accounts/+transactions',
-  'app/+accounts/+budget',
+  'app/+account',
+  'app/+bank-accounts',
+  'app/+budget',
   /** @cli-barrel */
 ];
 
-const cliSystemConfigPackages: any = {};
+const cliSystemConfigPackages: any = {
+  
+  
+};
 barrels.forEach((barrelName: string) => {
   cliSystemConfigPackages[barrelName] = { main: 'index' };
 });
@@ -50,7 +69,6 @@ System.config({
   map: {
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
-    '@ngrx': 'vendor/@ngrx',
     'main': 'main.js'
   },
   packages: cliSystemConfigPackages

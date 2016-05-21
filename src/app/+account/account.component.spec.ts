@@ -9,25 +9,25 @@ import {
 import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { TransactionsComponent } from './transactions.component';
+import { AccountComponent } from './account.component';
 
-describe('Component: Transactions', () => {
+describe('Component: Accounts', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [TransactionsComponent]);
+  beforeEachProviders(() => [AccountComponent]);
   beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
     builder = tcb;
   }));
 
-  it('should inject the component', inject([TransactionsComponent],
-      (component: TransactionsComponent) => {
+  it('should inject the component', inject([AccountComponent],
+      (component: AccountComponent) => {
     expect(component).toBeTruthy();
   }));
 
   it('should create the component', inject([], () => {
-    return builder.createAsync(TransactionsComponentTestController)
+    return builder.createAsync(AccountComponentTestController)
       .then((fixture: ComponentFixture<any>) => {
-        let query = fixture.debugElement.query(By.directive(TransactionsComponent));
+        let query = fixture.debugElement.query(By.directive(AccountComponent));
         expect(query).toBeTruthy();
         expect(query.componentInstance).toBeTruthy();
       });
@@ -37,10 +37,10 @@ describe('Component: Transactions', () => {
 @Component({
   selector: 'test',
   template: `
-    <app-transactions></app-transactions>
+    <app-account></app-account>
   `,
-  directives: [TransactionsComponent]
+  directives: [AccountComponent]
 })
-class TransactionsComponentTestController {
+class AccountComponentTestController {
 }
 
