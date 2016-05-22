@@ -3,7 +3,9 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-    '@angular2-material': 'vendor/@angular2-material'
+    '@angular2-material': 'vendor/@angular2-material',
+    'firebase': 'vendor/firebase/lib/firebase-web.js',
+    'angularfire2': 'vendor/angularfire2'
 };
 
 /** User packages configuration. */
@@ -22,6 +24,26 @@ const packages: any = {
   format: 'cjs',
   defaultExtension: 'js',
   main: 'sidenav.js'
+},
+'@angular2-material/button': {
+  format: 'cjs',
+  defaultExtension: 'js',
+  main: 'button.js'
+},
+'@angular2-material/icon': {
+  format: 'cjs',
+  defaultExtension: 'js',
+  main: 'icon.js'
+},
+'@angular2-material/list': {
+  format: 'cjs',
+  defaultExtension: 'js',
+  main: 'list.js'
+},
+
+'angularfire2': {
+  defaultExtension: 'js',
+  main: 'angularfire2.js'
 }
 
 };

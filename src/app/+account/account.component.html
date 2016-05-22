@@ -1,5 +1,7 @@
-<p>
-  account works!
-</p>
+<button *ngIf="!(isLoggedIn | async)" md-raised-button (click)="login()">Login</button>
+
+<div *ngIf="(isLoggedIn | async)">
+  <p>{{(auth | async).uid}}</p>
+</div>
 
 <router-outlet></router-outlet>
