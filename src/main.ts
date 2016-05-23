@@ -18,7 +18,7 @@ if (environment.production) {
 
 bootstrap(WorldWideBudgetAppComponent, [
   FIREBASE_PROVIDERS,
-  defaultFirebase('https://project-8175615913913177070.firebaseio.com'),
+  defaultFirebase('https://wwb.firebaseio.com'),
 firebaseAuthConfig({
   provider: AuthProviders.Google,
   method: AuthMethods.Popup
