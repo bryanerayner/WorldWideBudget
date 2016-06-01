@@ -4,7 +4,7 @@ import {
     Iterable
 } from 'immutable';
 
-export interface TypedModel<T>  extends Record.Class {
+export interface TypedRecord<T>  extends Record.Class {
     new(): T;
     
     // Persistent changes

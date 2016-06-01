@@ -4,7 +4,7 @@ import Map = immutable.Map;
 import Record = immutable.Record;
 
 import {
-    TypedModel
+    TypedRecord
 } from './model-helpers';
 
 import {
@@ -25,7 +25,7 @@ import {
 interface ITransactionState {
     transactions: Map<string, ITransactionRecord>;    
 }
-export interface ITransactionStateRecord extends ITransactionState, TypedModel<ITransactionStateRecord> {
+export interface ITransactionStateRecord extends ITransactionState, TypedRecord<ITransactionStateRecord> {
     
 }
 const defaultTransactionState:ITransactionState = {
@@ -43,7 +43,7 @@ interface IBankAccountState {
 const defaultBankAccountState : IBankAccountState = {
     accounts: Map<string, BankAccount>()
 };
-export interface IBankAccountStateRecord extends IBankAccountState, TypedModel<IBankAccountStateRecord>{
+export interface IBankAccountStateRecord extends IBankAccountState, TypedRecord<IBankAccountStateRecord>{
 }
 export const BankAccountState = Record(defaultBankAccountState, 'BankAccountState') as IBankAccountStateRecord;
 
@@ -68,6 +68,6 @@ const defaultAppState:IAppState = {
 };
 
 
-export interface IAppStateRecord extends IAppState, TypedModel<IAppStateRecord>{}
+export interface IAppStateRecord extends IAppState, TypedRecord<IAppStateRecord>{}
 
 export const AppState = Record(defaultAppState, 'AppState');
