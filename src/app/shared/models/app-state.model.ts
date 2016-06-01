@@ -1,7 +1,11 @@
+import * as immutable from 'immutable';
+
+import Map = immutable.Map;
+import Record = immutable.Record;
+
 import {
-    Map,
-    Record
-} from 'immutable';
+    TypedModel
+} from './model-helpers';
 
 import {
     UserAccount
@@ -21,12 +25,13 @@ import {
 interface ITransactionState {
     transactions: Map<string, ITransactionRecord>;    
 }
+export interface ITransactionStateRecord extends ITransactionState, TypedModel<ITransactionStateRecord> {
+    
+}
 const defaultTransactionState:ITransactionState = {
     transactions: Map<string, ITransactionRecord>()
 };
-export interface ITransactionStateRecord extends ITransactionState, Record.Class {
-    new (): ITransactionStateRecord;
-}
+
 export const TransactionState = Record(defaultTransactionState, 'TransactionState') as ITransactionStateRecord;
 
 
@@ -38,8 +43,7 @@ interface IBankAccountState {
 const defaultBankAccountState : IBankAccountState = {
     accounts: Map<string, BankAccount>()
 };
-export interface IBankAccountStateRecord extends IBankAccountState, Record.Class {
-    new (): IBankAccountStateRecord;
+export interface IBankAccountStateRecord extends IBankAccountState, TypedModel<IBankAccountStateRecord>{
 }
 export const BankAccountState = Record(defaultBankAccountState, 'BankAccountState') as IBankAccountStateRecord;
 
@@ -61,9 +65,9 @@ const defaultAppState:IAppState = {
     transactions: new TransactionState(),
     bankAccounts: new BankAccountState(),
     budget: null
-}
-export interface IAppStateRecord extends IAppState, Record.Class {
-    
-}
+};
+
+
+export interface IAppStateRecord extends IAppState, TypedModel<IAppStateRecord>{}
 
 export const AppState = Record(defaultAppState, 'AppState');

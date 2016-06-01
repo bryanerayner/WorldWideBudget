@@ -26,7 +26,7 @@ const addTransaction:ActionReducer<ITransactionStateRecord> = (state: ITransacti
             ret = state.setIn(['transactions', transaction.id], transaction);
         }
     }
-    return state;
+    return ret;
 };
 const updateTransaction:ActionReducer<ITransactionStateRecord> = (state: ITransactionStateRecord, action:Action)=>{
     if (action.type === UPDATE_TRANSACTION){
