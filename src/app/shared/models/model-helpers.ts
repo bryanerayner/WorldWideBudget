@@ -4,8 +4,10 @@ import {
     Iterable
 } from 'immutable';
 
-export interface TypedRecord<T>  extends Record.Class {
-    new(): T;
+export interface TypedRecord<T, TNew>  {
+    new(): TNew;
+
+    new(values:T): TNew;
     
     // Persistent changes
 
@@ -13,7 +15,7 @@ export interface TypedRecord<T>  extends Record.Class {
      * Returns a new Map also containing the new key, value pair. If an equivalent
      * key already exists in this Map, it will be replaced.
      */
-    set(key: string, value: any): T;
+    set(key: string, value: any): TNew;
 
     /**
      * Returns a new Map which excludes this `key`.
@@ -22,13 +24,13 @@ export interface TypedRecord<T>  extends Record.Class {
      * the ES6 collection API.
      * @alias remove
      */
-    delete(key: string): T;
-    remove(key: string): T;
+    delete(key: string): TNew;
+    remove(key: string): TNew;
 
     /**
      * Returns a new Map containing no keys or values.
      */
-    clear(): T;
+    clear(): TNew;
 
     /**
      * Returns a new Map having updated the value at this `key` with the return
@@ -38,9 +40,9 @@ export interface TypedRecord<T>  extends Record.Class {
      *
      * Equivalent to: `map.set(key, updater(map.get(key, notSetValue)))`.
      */
-    update(updater: (value: TypedModel<T>) => TypedModel<T>): T;
-    update(key: string, updater: (value: any) => any): T;
-    update(key: string, notSetValue: any, updater: (value: any) => any): T;
+    update(updater: (value: TypedRecord<T, TNew>) => TypedRecord<T, TNew>): TNew;
+    update(key: string, updater: (value: any) => any): TNew;
+    update(key: string, notSetValue: any, updater: (value: any) => any): TNew;
 
     /**
      * Returns a new Map resulting from merging the provided Iterables
@@ -59,8 +61,8 @@ export interface TypedRecord<T>  extends Record.Class {
      *     y.merge(x) // { b: 20, a: 10, d: 60, c: 30 }
      *
      */
-    merge(...iterables: Iterable<string, any>[]): T;
-    merge(...iterables: {[key: string]: any}[]): T;
+    merge(...iterables: Iterable<string, any>[]): TNew;
+    merge(...iterables: {[key: string]: any}[]): TNew;
 
     /**
      * Like `merge()`, `mergeWith()` returns a new Map resulting from merging
@@ -76,11 +78,11 @@ export interface TypedRecord<T>  extends Record.Class {
     mergeWith(
       merger: (previous?: any, next?: any, key?: string) => any,
       ...iterables: Iterable<string, any>[]
-    ): T;
+    ): TNew;
     mergeWith(
       merger: (previous?: any, next?: any, key?: string) => any,
       ...iterables: {[key: string]: any}[]
-    ): T;
+    ): TNew;
 
     /**
      * Like `merge()`, but when two Iterables conflict, it merges them as well,
@@ -91,8 +93,8 @@ export interface TypedRecord<T>  extends Record.Class {
      *     x.mergeDeep(y) // {a: { x: 2, y: 10 }, b: { x: 20, y: 5 }, c: { z: 3 } }
      *
      */
-    mergeDeep(...iterables: Iterable<string, any>[]): T;
-    mergeDeep(...iterables: {[key: string]: any}[]): T;
+    mergeDeep(...iterables: Iterable<string, any>[]): TNew;
+    mergeDeep(...iterables: {[key: string]: any}[]): TNew;
 
     /**
      * Like `mergeDeep()`, but when two non-Iterables conflict, it uses the
@@ -107,11 +109,11 @@ export interface TypedRecord<T>  extends Record.Class {
     mergeDeepWith(
       merger: (previous?: any, next?: any, key?: string) => any,
       ...iterables: Iterable<string, any>[]
-    ): T;
+    ): TNew;
     mergeDeepWith(
       merger: (previous?: any, next?: any, key?: string) => any,
       ...iterables: {[key: string]: any}[]
-    ): T;
+    ): TNew;
 
 
     // Deep persistent changes
@@ -120,8 +122,8 @@ export interface TypedRecord<T>  extends Record.Class {
      * Returns a new Map having set `value` at this `keyPath`. If any keys in
      * `keyPath` do not exist, a new immutable Map will be created at that key.
      */
-    setIn(keyPath: Array<any>, value: any): T;
-    setIn(KeyPath: Iterable<any, any>, value: any): T;
+    setIn(keyPath: Array<any>, value: any): TNew;
+    setIn(KeyPath: Iterable<any, any>, value: any): TNew;
 
     /**
      * Returns a new Map having removed the value at this `keyPath`. If any keys
@@ -129,10 +131,10 @@ export interface TypedRecord<T>  extends Record.Class {
      *
      * @alias removeIn
      */
-    deleteIn(keyPath: Array<any>): T;
-    deleteIn(keyPath: Iterable<any, any>): T;
-    removeIn(keyPath: Array<any>): T;
-    removeIn(keyPath: Iterable<any, any>): T;
+    deleteIn(keyPath: Array<any>): TNew;
+    deleteIn(keyPath: Iterable<any, any>): TNew;
+    removeIn(keyPath: Array<any>): TNew;
+    removeIn(keyPath: Iterable<any, any>): TNew;
 
     /**
      * Returns a new Map having applied the `updater` to the entry found at the
@@ -158,21 +160,21 @@ export interface TypedRecord<T>  extends Record.Class {
     updateIn(
       keyPath: Array<any>,
       updater: (value: any) => any
-    ): T;
+    ): TNew;
     updateIn(
       keyPath: Array<any>,
       notSetValue: any,
       updater: (value: any) => any
-    ): T;
+    ): TNew;
     updateIn(
       keyPath: Iterable<any, any>,
       updater: (value: any) => any
-    ): T;
+    ): TNew;
     updateIn(
       keyPath: Iterable<any, any>,
       notSetValue: any,
       updater: (value: any) => any
-    ): T;
+    ): TNew;
 
     /**
      * A combination of `updateIn` and `merge`, returning a new Map, but
@@ -186,15 +188,15 @@ export interface TypedRecord<T>  extends Record.Class {
     mergeIn(
       keyPath: Iterable<any, any>,
       ...iterables: Iterable<string, any>[]
-    ): T;
+    ): TNew;
     mergeIn(
       keyPath: Array<any>,
       ...iterables: Iterable<string, any>[]
-    ): T;
+    ): TNew;
     mergeIn(
       keyPath: Array<any>,
       ...iterables: {[key: string]: any}[]
-    ): T;
+    ): TNew;
 
     /**
      * A combination of `updateIn` and `mergeDeep`, returning a new Map, but
@@ -208,15 +210,15 @@ export interface TypedRecord<T>  extends Record.Class {
     mergeDeepIn(
       keyPath: Iterable<any, any>,
       ...iterables: Iterable<string, any>[]
-    ): T;
+    ): TNew;
     mergeDeepIn(
       keyPath: Array<any>,
       ...iterables: Iterable<string, any>[]
-    ): T;
+    ): TNew;
     mergeDeepIn(
       keyPath: Array<any>,
       ...iterables: {[key: string]: any}[]
-    ): T;
+    ): TNew;
 
 
     // Transient changes
@@ -245,7 +247,7 @@ export interface TypedRecord<T>  extends Record.Class {
      * `withMutations`! Only `set` and `merge` may be used mutatively.
      *
      */
-    withMutations(mutator: (mutable: TypedModel<T>) => any): T;
+    withMutations(mutator: (mutable: TypedRecord<T, TNew>) => any): TNew;
 
     /**
      * Another way to avoid creation of intermediate Immutable maps is to create
@@ -260,12 +262,12 @@ export interface TypedRecord<T>  extends Record.Class {
      * Note: Not all methods can be used on a mutable collection or within
      * `withMutations`! Only `set` and `merge` may be used mutatively.
      */
-    asMutable(): T;
+    asMutable(): TNew;
 
     /**
      * The yin to `asMutable`'s yang. Because it applies to mutable collections,
      * this operation is *mutable* and returns itself. Once performed, the mutable
      * copy has become immutable and can be safely returned from a function.
      */
-    asImmutable(): T;
+    asImmutable(): TNew;
 }

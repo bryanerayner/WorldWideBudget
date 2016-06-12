@@ -2,6 +2,10 @@ import {
     Record
 } from 'immutable';
 
+import {
+    TypedRecord
+} from './model-helpers';
+
 export const enum TransactionType {
     /**
      * The transaction type hasn't been defined
@@ -71,7 +75,7 @@ export interface ITransaction {
     /**
      * The amount of the transaction, described
      */
-    memo: TransactionMemo[];
+    memo: ITransactionMemoRecord[];
     
     /**
      * The other transaction which goes with this one
@@ -84,7 +88,7 @@ export interface ITransaction {
     totalAmount: number;
 }
 
-export interface ITransactionRecord extends ITransaction, Record.Class {
+export interface ITransactionRecord extends ITransaction, TypedRecord<ITransaction, ITransactionRecord> {
     
 }
 
@@ -116,8 +120,7 @@ export interface ITransactionMemo {
      */
     amount: number;
 }
-export interface ITransactionMemoRecord extends ITransactionMemo, Record.Class {
-    new (values: ITransactionMemo):Record.Class;
+export interface ITransactionMemoRecord extends ITransactionMemo, TypedRecord<ITransactionMemo, ITransactionMemoRecord> {
 }
 
 
@@ -149,7 +152,7 @@ const defaultTransactionMemo : ITransactionMemo = {
     amount: null
 }
 
-export const TransactionMemo  = Record(defaultTransactionMemo, 'TransactionMemo') as ITransactionMemoRecord;
+export const TransactionMemo  = Record(defaultTransactionMemo, 'TransactionMemo') as any as ITransactionMemoRecord;
 
 const defaultTransaction: ITransaction = {
     id:'',
@@ -160,4 +163,4 @@ const defaultTransaction: ITransaction = {
     pair: null,
     totalAmount: null
 };
-export const Transaction : ITransactionRecord = Record(defaultTransaction, 'Transaction') as ITransactionRecord;
+export const Transaction : ITransactionRecord = Record(defaultTransaction, 'Transaction') as any as ITransactionRecord;

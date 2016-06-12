@@ -15,26 +15,27 @@ export interface AddTransactionActionPayload {
 }
 
 
-const addTransaction:ActionReducer<ITransactionStateRecord> = (state: ITransactionStateRecord, action:Action)=>{
+export const addTransaction:ActionReducer<ITransactionStateRecord> = (state: ITransactionStateRecord, action:Action)=>{
     let ret = state;
     if (action.type === ADD_TRANSACTION){
         let payload: AddTransactionActionPayload = action.payload;
         let {
             transaction
         } = payload;
+
         if (transaction && transaction.id) {
             ret = state.setIn(['transactions', transaction.id], transaction);
         }
     }
     return ret;
 };
-const updateTransaction:ActionReducer<ITransactionStateRecord> = (state: ITransactionStateRecord, action:Action)=>{
+export const updateTransaction:ActionReducer<ITransactionStateRecord> = (state: ITransactionStateRecord, action:Action)=>{
     if (action.type === UPDATE_TRANSACTION){
         
     }
     return state;
 };
-const deleteTransaction:ActionReducer<ITransactionStateRecord> = (state: ITransactionStateRecord, action:Action)=>{
+export const deleteTransaction:ActionReducer<ITransactionStateRecord> = (state: ITransactionStateRecord, action:Action)=>{
     if (action.type === DELETE_TRANSACTION){
         
     }

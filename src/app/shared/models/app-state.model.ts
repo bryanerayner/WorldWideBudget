@@ -25,14 +25,14 @@ import {
 interface ITransactionState {
     transactions: Map<string, ITransactionRecord>;    
 }
-export interface ITransactionStateRecord extends ITransactionState, TypedRecord<ITransactionStateRecord> {
+export interface ITransactionStateRecord extends ITransactionState, TypedRecord<ITransactionState, ITransactionStateRecord> {
     
 }
+
 const defaultTransactionState:ITransactionState = {
     transactions: Map<string, ITransactionRecord>()
 };
-
-export const TransactionState = Record(defaultTransactionState, 'TransactionState') as ITransactionStateRecord;
+export const TransactionState = Record(defaultTransactionState, 'TransactionState') as any as ITransactionStateRecord;
 
 
 
@@ -43,9 +43,9 @@ interface IBankAccountState {
 const defaultBankAccountState : IBankAccountState = {
     accounts: Map<string, BankAccount>()
 };
-export interface IBankAccountStateRecord extends IBankAccountState, TypedRecord<IBankAccountStateRecord>{
+export interface IBankAccountStateRecord extends IBankAccountState, TypedRecord<IBankAccountState, IBankAccountStateRecord>{
 }
-export const BankAccountState = Record(defaultBankAccountState, 'BankAccountState') as IBankAccountStateRecord;
+export const BankAccountState = Record(defaultBankAccountState, 'BankAccountState') as any as IBankAccountStateRecord;
 
 
 
@@ -68,6 +68,6 @@ const defaultAppState:IAppState = {
 };
 
 
-export interface IAppStateRecord extends IAppState, TypedRecord<IAppStateRecord>{}
+export interface IAppStateRecord extends IAppState, TypedRecord<IAppState, IAppStateRecord>{}
 
 export const AppState = Record(defaultAppState, 'AppState');

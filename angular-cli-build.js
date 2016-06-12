@@ -15,6 +15,7 @@ module.exports = function(defaults) {
       '@angular2-material/**/*.js',
       'angularfire2/**/*.js',
       'firebase/**/*.js',
+      'immutable/**/*.js',
     ]
   });
 };
